@@ -9,9 +9,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Dell Academy</title>
-        <meta name="description" content="Transport calculator" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Gerenciamento de frete" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
