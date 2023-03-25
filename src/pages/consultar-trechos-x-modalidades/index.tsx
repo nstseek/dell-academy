@@ -2,16 +2,25 @@ import { Grid, Typography } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import { FormProvider } from "react-hook-form";
+import { FormProvider, useWatch } from "react-hook-form";
 import { FreightForm } from "./components/freight-form/FreightForm";
 import { FreightResume } from "./components/freight-resume/FreightResume";
 import { useCreateFreightForm } from "./hooks/useCreateFreightForm";
 import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
+import { useResetOnChangeForm } from "./hooks/useResetOnChangeForm";
 
 const ConsultarTrechosModalidades = () => {
   const form = useCreateFreightForm();
 
-  const { mutate, data, isLoading, error } = useGetFreightCost();
+  const { mutate, data, isLoading, error, reset } = useGetFreightCost();
+
+  useResetOnChangeForm({
+    control: form.control,
+    reset,
+    data,
+    isLoading,
+    error,
+  });
 
   return (
     <>

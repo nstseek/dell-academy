@@ -8,15 +8,9 @@ export const FreightFormErrors: React.FC = () => {
 
   const { errors } = form.formState;
 
-  console.log(errors);
-
-  useEffect(() => {
-    console.log(form.formState.errors);
-  }, [form.formState.errors]);
-
-  return !!Object.values(form.formState.errors).length ? (
+  return !!Object.values(errors).length ? (
     <Alert severity="error">
-      <>{Object.values(form.formState.errors)[0]?.message}</>
+      <>{Object.values(errors)[0]?.message}</>
     </Alert>
   ) : null;
 };

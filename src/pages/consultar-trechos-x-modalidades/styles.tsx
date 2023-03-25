@@ -1,8 +1,13 @@
 import { Grid } from "@mui/material";
 
-export const Wrapper: React.FC<{ children: JSX.Element | null }> = ({
-  children,
-}) => (
+export const Wrapper: React.FC<{
+  children:
+    | (JSX.Element | boolean | null | undefined)[]
+    | JSX.Element
+    | boolean
+    | null
+    | undefined;
+}> = ({ children }) => (
   <Grid
     container
     direction="column"

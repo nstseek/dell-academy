@@ -47,10 +47,15 @@ export const FreightForm: React.FC<Props> = ({ onSubmit }) => {
             <Autocomplete
               disablePortal
               fullWidth
+              sx={{ borderColor: "red" }}
               id="cidade-de-origem"
               options={cidadesOptions}
               renderInput={(params) => (
-                <TextField {...params} label="Cidade de Origem" />
+                <TextField
+                  {...params}
+                  label="Cidade de Origem"
+                  error={!!form.formState.errors.cidadeA}
+                />
               )}
               isOptionEqualToValue={isOptionEqualToValue}
               onChange={(_e, value) => {
@@ -63,7 +68,11 @@ export const FreightForm: React.FC<Props> = ({ onSubmit }) => {
               id="cidade-de-destino"
               options={cidadesOptions}
               renderInput={(params) => (
-                <TextField {...params} label="Cidade de Destino" />
+                <TextField
+                  {...params}
+                  label="Cidade de Destino"
+                  error={!!form.formState.errors.cidadeB}
+                />
               )}
               onChange={(_e, value) => {
                 form.setValue("cidadeB", value?.id ?? "");
@@ -78,7 +87,11 @@ export const FreightForm: React.FC<Props> = ({ onSubmit }) => {
               options={freightOptions}
               isOptionEqualToValue={isOptionEqualToValue}
               renderInput={(params) => (
-                <TextField {...params} label="Modalidade de Transporte" />
+                <TextField
+                  {...params}
+                  label="Modalidade de Transporte"
+                  error={!!form.formState.errors.freightType}
+                />
               )}
               onChange={(_e, value) => {
                 form.setValue("freightType", value?.id ?? "");
@@ -90,7 +103,7 @@ export const FreightForm: React.FC<Props> = ({ onSubmit }) => {
               color="primary"
               type="submit"
             >
-              Calculate
+              Calcular
             </Button>
           </>
         )}

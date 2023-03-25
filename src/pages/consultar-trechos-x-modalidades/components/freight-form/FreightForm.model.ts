@@ -19,7 +19,7 @@ export const getFreightOptions = (
 ) => {
   return freightOptionsArray
     ? freightOptionsArray.freightOptions.map((freightOption) => ({
-        label: freightOption.title,
+        label: freightOption.title + ` (${freightOption.capacity} ton)`,
         id: freightOption.id.toString(),
       }))
     : [];
