@@ -1,14 +1,20 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, useTheme } from "@mui/material";
 
-export const ResumeRow = ({ children }: { children: JSX.Element[] | null }) => (
-  <Grid
-    display="flex"
-    justifyContent="space-between"
-    alignItems="center"
-    borderBottom="1px dashed #ccc"
-    padding="1px"
-  >
-    {children}
-  </Grid>
-);
+export const ResumeRow = ({ children }: { children: JSX.Element[] | null }) => {
+  const {
+    palette: { grey },
+  } = useTheme();
+
+  return (
+    <Grid
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      borderBottom={`1px dashed ${grey["300"]}`}
+      padding="1px"
+    >
+      {children}
+    </Grid>
+  );
+};

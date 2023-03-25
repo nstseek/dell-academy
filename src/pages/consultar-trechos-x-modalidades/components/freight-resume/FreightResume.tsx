@@ -1,6 +1,12 @@
 import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
 import { formatNumberToCurrency } from "@/utils/currency";
-import { Alert, CircularProgress, Grid, Typography } from "@mui/material";
+import {
+  Alert,
+  CircularProgress,
+  Grid,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { Wrapper } from "../../styles";
 import { ResumeRow } from "./FreightResume.styles";
@@ -11,6 +17,10 @@ type Props = Pick<
 >;
 
 export const FreightResume: React.FC<Props> = ({ data, isLoading, error }) => {
+  const {
+    palette: { grey },
+  } = useTheme();
+
   const price = data ? formatNumberToCurrency(data.freightOption.price) : "";
 
   return (
@@ -59,7 +69,7 @@ export const FreightResume: React.FC<Props> = ({ data, isLoading, error }) => {
           <ResumeRow>
             <Typography variant="body1">
               <span style={{ fontWeight: "bold" }}>Custo total</span>
-              <sub style={{ margin: 5, color: "#888" }}>
+              <sub style={{ margin: 5, color: grey["500"] }}>
                 ({data.distancia}km x {price})
               </sub>
             </Typography>
