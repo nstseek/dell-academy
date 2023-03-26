@@ -17,7 +17,7 @@ export const Wrapper: React.FC<{
     borderRadius={2}
     alignItems="center"
     rowGap={2}
-    flex={1}
+    height="100%"
   >
     {children}
   </Grid>

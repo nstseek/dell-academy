@@ -4,25 +4,21 @@ import { useFormContext } from "react-hook-form";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import { FreightForm as FreightFormType } from "../../hooks/useCreateFreightForm";
 import { useGetCidades } from "@/api/Cidades/useGetCidades";
-import { getCidadeOptions, getFreightOptions } from "./FreightForm.model";
 import { useGetFreightOptions } from "@/api/Freight/useGetFreightOptions";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Wrapper } from "../../styles";
-import { FreightFormErrors } from "./components/FreightFormErrors/FreightFormErrors";
+import { Wrapper } from "@/common/components/Wrapper/Wrapper";
+import { FormErrors } from "@/common/components/FormErrors/FormErrors";
 
 type Props = {
   onSubmit(values: FreightFormType): void;
 };
 
 export const FreightForm: React.FC<Props> = ({ onSubmit }) => {
-  const { data: cidadesData, isLoading: isCidadesLoading } = useGetCidades();
+  const { options: cidadesOptions = [], isLoading: isCidadesLoading } =
+    useGetCidades();
 
-  const cidadesOptions = getCidadeOptions(cidadesData);
-
-  const { data: freightOptionsData, isLoading: isFreightOptionsLoading } =
+  const { options: freightOptions = [], isLoading: isFreightOptionsLoading } =
     useGetFreightOptions();
-
-  const freightOptions = getFreightOptions(freightOptionsData);
 
   const isLoading = isCidadesLoading || isFreightOptionsLoading;
 
@@ -43,7 +39,7 @@ export const FreightForm: React.FC<Props> = ({ onSubmit }) => {
           <CircularProgress />
         ) : (
           <>
-            <FreightFormErrors />
+            <FormErrors />
             <Autocomplete
               disablePortal
               fullWidth

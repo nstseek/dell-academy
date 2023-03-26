@@ -1,8 +1,12 @@
 import { Grid, Typography } from "@mui/material";
 import Head from "next/head";
 import React from "react";
+import { useCreateCidadesForm } from "./hooks/useCreateCidadesForm";
+import { Cidades } from "./components/Cidades/Cidades";
 
 const CadstrarTransporte = () => {
+  const forms = useCreateCidadesForm();
+
   return (
     <>
       <Head>
@@ -16,11 +20,12 @@ const CadstrarTransporte = () => {
             flexDirection="column"
             alignItems="center"
             gap={2}
+            width="100%"
           >
-            <Grid flex={1}>
-              <Typography>Testing 1</Typography>
+            <Grid height={300} width="100%">
+              <Cidades {...forms} />
             </Grid>
-            <Grid flex={1}>
+            <Grid flex={1} width="100%">
               <Typography>Testing 2</Typography>
             </Grid>
           </Grid>

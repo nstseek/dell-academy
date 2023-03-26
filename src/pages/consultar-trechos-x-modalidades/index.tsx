@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import Head from "next/head";
 import React from "react";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import { FormProvider, useWatch } from "react-hook-form";
+import { FormProvider } from "react-hook-form";
 import { FreightForm } from "./components/freight-form/FreightForm";
 import { FreightResume } from "./components/freight-resume/FreightResume";
 import { useCreateFreightForm } from "./hooks/useCreateFreightForm";

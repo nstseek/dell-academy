@@ -1,5 +1,5 @@
-import { DellLogo } from "@/components/DellLogo";
-import { Sidebar } from "@/components/Sidebar";
+import { DellLogo } from "@/common/components/DellLogo";
+import { Sidebar } from "@/common/components/Sidebar";
 import { dellTheme } from "@/theme";
 import { ThemeProvider } from "@emotion/react";
 import type { AppProps } from "next/app";

@@ -1,4 +1,5 @@
 import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
+import { Wrapper } from "@/common/components/Wrapper/Wrapper";
 import { formatNumberToCurrency } from "@/utils/currency";
 import {
   Alert,
@@ -8,7 +9,6 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-import { Wrapper } from "../../styles";
 import { ResumeRow } from "./FreightResume.styles";
 
 type Props = Pick<
