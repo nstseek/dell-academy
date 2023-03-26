@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import React from "react";
+import React, { useContext } from "react";
 import { CidadesForm } from "./components/CidadesForm/CidadesForm";
 import { CidadesList } from "./components/CidadesList/CidadesList";
 import {
@@ -11,6 +11,8 @@ import {
 } from "react-hook-form";
 import { CidadeForm, CidadesListForm } from "../../hooks/useCreateCidadesForm";
 import { useGetCidades } from "@/api/Cidades/useGetCidades";
+import { AutocompleteOption } from "@/utils/types";
+import { CidadesObjetosContext } from "../../context/CidadesObjetosContext";
 
 type Props = {
   cidadeForm: ReturnType<typeof useForm<CidadeForm>>;
@@ -18,12 +20,6 @@ type Props = {
 };
 
 export const Cidades: React.FC<Props> = ({ cidadeForm, cidadesListForm }) => {
-  const {
-    options: cidadesOptions = [],
-    data: cidadesData,
-    isLoading,
-  } = useGetCidades();
-
   const cidadesListFieldArray = useFieldArray<
     CidadesListForm,
     never,
@@ -50,6 +46,8 @@ export const Cidades: React.FC<Props> = ({ cidadeForm, cidadesListForm }) => {
     cidadesListFieldArray.append({ value: values.cidadeToAdd });
   };
 
+  const { cidades } = useContext(CidadesObjetosContext);
+
   return (
     <Grid
       container
@@ -59,7 +57,7 @@ export const Cidades: React.FC<Props> = ({ cidadeForm, cidadesListForm }) => {
       alignItems="center"
       columnGap={2}
     >
-      {isLoading ? (
+      {!cidades || cidades.isLoading ? (
         <Grid gridColumn={2}>
           <CircularProgress />
         </Grid>
@@ -67,13 +65,13 @@ export const Cidades: React.FC<Props> = ({ cidadeForm, cidadesListForm }) => {
         <>
           <Grid flex={1} display="flex" alignItems="center">
             <FormProvider {...cidadeForm}>
-              <CidadesForm options={cidadesOptions} onSubmit={onAddCidade} />
+              <CidadesForm onSubmit={onAddCidade} />
             </FormProvider>
           </Grid>
           <SwapHorizIcon />
           <Grid flex={1} display="flex">
             <FormProvider {...cidadesListForm}>
-              <CidadesList data={cidadesData} />
+              <CidadesList />
             </FormProvider>
           </Grid>
         </>

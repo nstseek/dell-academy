@@ -8,17 +8,20 @@ type DataType = Awaited<ReturnType<typeof Cost["POST"]>>;
 export const useGetFreightCost = () => {
   return useMutation<DataType, APIError, FreightForm>(
     `cost`,
-    ({ cidadeA, cidadeB, freightType }) =>
-      fetch("api/Freight/cost", {
+    ({ cidadeA, cidadeB, freightType }) => {
+      const body: Parameters<typeof Cost["POST"]>[0] = {
+        cidadeAId: Number(cidadeA),
+        cidadeBId: Number(cidadeB),
+        freightType: Number(freightType),
+      };
+
+      return fetch("api/Freight/cost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          cidadeAId: Number(cidadeA),
-          cidadeBId: Number(cidadeB),
-          freightType: Number(freightType),
-        }),
-      }).then((res) => res.json())
+        body: JSON.stringify(body),
+      }).then((res) => res.json());
+    }
   );
 };

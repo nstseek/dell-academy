@@ -1,24 +1,21 @@
 import { FormErrors } from "@/common/components/FormErrors/FormErrors";
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
+import { CidadesObjetosContext } from "@/pages/cadastrar-transporte/context/CidadesObjetosContext";
 import { CidadeForm } from "@/pages/cadastrar-transporte/hooks/useCreateCidadesForm";
 import { AutocompleteOption } from "@/utils/types";
 import AddIcon from "@mui/icons-material/Add";
-import {
-  Autocomplete,
-  Button,
-  CircularProgress,
-  TextField,
-} from "@mui/material";
-import React from "react";
+import { Autocomplete, Button, TextField } from "@mui/material";
+import React, { useContext } from "react";
 import { useFormContext } from "react-hook-form";
 
 type Props = {
   onSubmit: (values: CidadeForm) => void;
-  options: AutocompleteOption[];
 };
 
-export const CidadesForm: React.FC<Props> = ({ onSubmit, options }) => {
+export const CidadesForm: React.FC<Props> = ({ onSubmit }) => {
   const form = useFormContext<CidadeForm>();
+
+  const { cidades } = useContext(CidadesObjetosContext);
 
   const isOptionEqualToValue = (
     option: AutocompleteOption,
@@ -36,12 +33,12 @@ export const CidadesForm: React.FC<Props> = ({ onSubmit, options }) => {
           disablePortal
           fullWidth
           sx={{ borderColor: "red" }}
-          id="cidade-de-origem"
-          options={options}
+          id="cidade"
+          options={cidades?.options ?? []}
           renderInput={(params) => (
             <TextField
               {...params}
-              label="Cidade de Origem"
+              label="Cidade"
               error={!!form.formState.errors.cidadeToAdd}
             />
           )}
