@@ -1,13 +1,10 @@
 import { Grid } from "@mui/material";
+import { ReactNode } from "react";
 
 export const Wrapper: React.FC<{
-  children:
-    | (JSX.Element | boolean | null | undefined)[]
-    | JSX.Element
-    | boolean
-    | null
-    | undefined;
-}> = ({ children }) => (
+  children: ReactNode;
+  gap?: number | string;
+}> = ({ children, gap }) => (
   <Grid
     container
     direction="column"
@@ -16,7 +13,7 @@ export const Wrapper: React.FC<{
     border="1px solid #ccc"
     borderRadius={2}
     alignItems="center"
-    rowGap={2}
+    rowGap={gap ?? 2}
     height="100%"
   >
     {children}

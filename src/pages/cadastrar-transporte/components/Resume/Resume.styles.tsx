@@ -1,7 +1,9 @@
 import React, { ReactNode } from "react";
 import { Grid, useTheme } from "@mui/material";
 
-export const ResumeRow = ({ children }: { children: ReactNode }) => {
+type Props = { children: ReactNode; isHeader?: boolean };
+
+export const ResumeRow: React.FC<Props> = ({ children, isHeader }) => {
   const {
     palette: { grey },
   } = useTheme();
@@ -11,8 +13,10 @@ export const ResumeRow = ({ children }: { children: ReactNode }) => {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      borderBottom={`1px dashed ${grey["300"]}`}
+      borderBottom={`1px dashed ${grey["400"]}`}
       padding="1px"
+      paddingLeft={isHeader ? 0 : 2}
+      width="100%"
     >
       {children}
     </Grid>

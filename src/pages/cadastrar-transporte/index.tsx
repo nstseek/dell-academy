@@ -10,6 +10,7 @@ import { CidadesObjetosContextProvider } from "./context/CidadesObjetosContext";
 import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
 import { Resume } from "./components/Resume/Resume";
 import { useCalculateTransporte } from "./hooks/useCalculateTransporte";
+import { useResetResume } from "./hooks/useResetResume";
 
 const CadstrarTransporte = () => {
   const cidadesForms = useCreateCidadesForm();
@@ -18,9 +19,18 @@ const CadstrarTransporte = () => {
   const cidadesQuery = useGetCidades();
   const objetosQuery = useGetFreightObjects();
 
-  const { submit } = useCalculateTransporte({
+  const { submit, data, error, isLoading, reset } = useCalculateTransporte({
     cidadesListForm: cidadesForms.cidadesListForm,
     objetosListForm: objetosForms.objetosListForm,
+  });
+
+  useResetResume({
+    cidadesListForm: cidadesForms.cidadesListForm,
+    objetosListForm: objetosForms.objetosListForm,
+    data,
+    isLoading,
+    error,
+    reset,
   });
 
   const onCalculate = () => {
@@ -81,7 +91,12 @@ const CadstrarTransporte = () => {
                 <Typography variant="subtitle1" fontWeight="bold">
                   Resumo
                 </Typography>
-                <Resume onCalculate={onCalculate} />
+                <Resume
+                  onCalculate={onCalculate}
+                  data={data}
+                  isLoading={isLoading}
+                  error={error}
+                />
               </Grid>
             </CidadesObjetosContextProvider>
           </Grid>

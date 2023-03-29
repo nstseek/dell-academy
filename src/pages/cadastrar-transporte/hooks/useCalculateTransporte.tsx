@@ -51,8 +51,6 @@ export const useCalculateTransporte = ({
         (objectWithRoute) => objectWithRoute.route.includes(actualCityId)
       );
 
-      console.log(objectsRoutedThroughThisCity);
-
       const objectIdsWithQuantity: Body["objectIdsQuantity"] = {};
 
       objectsRoutedThroughThisCity.forEach((object) => {

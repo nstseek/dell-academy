@@ -1,89 +1,96 @@
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
-import { formatNumberToCurrency } from "@/common/utils/currency";
-import { Button, Grid, Typography, useTheme } from "@mui/material";
+import {
+  Alert,
+  Button,
+  CircularProgress,
+  Grid,
+  Typography,
+} from "@mui/material";
 import CalculateIcon from "@mui/icons-material/Calculate";
-import { ResumeRow } from "./components/ResumeRow";
+import { useCalculateTransporte } from "../../hooks/useCalculateTransporte";
+import { ResumeCity } from "./components/ResumeCity";
+import { getCityResumeData, getResumeTotalData } from "./Resume.model";
+import { ResumeRow } from "./Resume.styles";
+import { formatNumberToCurrency } from "@/common/utils/currency";
 
-type Props = {
+type Props = Pick<
+  ReturnType<typeof useCalculateTransporte>,
+  "data" | "isLoading" | "error"
+> & {
   onCalculate: (objetosFormList: any) => void;
 };
 
-export const Resume: React.FC<Props> = ({ onCalculate }) => {
-  const {
-    palette: { grey },
-  } = useTheme();
+export const Resume: React.FC<Props> = ({
+  onCalculate,
+  data,
+  isLoading,
+  error,
+}) => {
+  const citiesResumeData =
+    data?.map((transporte) => getCityResumeData(transporte)) ?? [];
 
-  const cidadeDestino = "Brasilia";
-  const distancia = 3253;
-
-  const caminhao = "Caminhão de pequeno porte";
-  const caminhaoQuantity = 3;
-  const caminhaoCapacity = 1;
-  const singleCaminhaoKmPrice = 4.89;
-  const singleCaminhaoPrice = singleCaminhaoKmPrice * distancia;
-  const caminhaoPrice = singleCaminhaoPrice * caminhaoQuantity;
+  const totalResumeData = getResumeTotalData({
+    citiesResumeData,
+  });
 
   return (
-    <Wrapper>
-      <Grid
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        borderBottom={`1px dashed ${grey[700]}`}
-        padding="1px"
-        width="100%"
-      >
-        <span>
-          <Typography display="inline" fontWeight="bold">
-            Para {cidadeDestino}
-          </Typography>{" "}
-          <Typography display="inline">
-            <sub style={{ color: grey[700] }}>({distancia}km)</sub>
-          </Typography>
-        </span>
-      </Grid>
-      <ResumeRow />
-      <Grid
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        borderBottom={`1px dashed ${grey[700]}`}
-        padding="1px"
-        width="100%"
-      >
-        <Typography display="inline" fontWeight="bold">
-          Total
-        </Typography>
-        <Typography display="inline" fontWeight="bold">
-          {formatNumberToCurrency(caminhaoPrice)}
-        </Typography>
-      </Grid>
-      <Grid
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        borderBottom={`1px dashed ${grey["400"]}`}
-        padding="1px"
-        paddingLeft={2}
-        width="100%"
-      >
-        <span>
-          <Typography display="inline" fontWeight="bold">
-            {caminhaoQuantity}x
-          </Typography>{" "}
-          <Typography display="inline">
-            {caminhao} ({caminhaoCapacity} ton){" "}
-            <sub style={{ color: grey[500] }}>
-              ({formatNumberToCurrency(singleCaminhaoKmPrice)} x {distancia}km ={" "}
-              {formatNumberToCurrency(singleCaminhaoPrice)})
-            </sub>
-          </Typography>
-        </span>
-        <Typography variant="body1" fontWeight="bold">
-          {formatNumberToCurrency(caminhaoPrice)}
-        </Typography>
-      </Grid>
+    <Wrapper gap={3}>
+      {isLoading && <CircularProgress />}
+      {error && !isLoading && <Alert severity="error">{error.message}</Alert>}
+      {data && !isLoading && (
+        <>
+          {citiesResumeData.map((cityResumeData, index) => (
+            <ResumeCity key={index} {...cityResumeData} />
+          ))}
+          <Typography fontWeight="bold">Total</Typography>
 
+          <Grid display="flex" width="100%" flexDirection="column" gap={1}>
+            <ResumeRow isHeader>
+              <Typography display="inline" fontWeight="bold">
+                Custo total por km
+              </Typography>
+              <Typography display="inline" fontWeight="bold">
+                {formatNumberToCurrency(totalResumeData.totalCostPerKm)}
+              </Typography>
+            </ResumeRow>
+            <ResumeRow isHeader>
+              <Typography display="inline" fontWeight="bold">
+                Custo total
+              </Typography>
+              <Typography display="inline" fontWeight="bold">
+                {formatNumberToCurrency(totalResumeData.totalCost)}
+              </Typography>
+            </ResumeRow>
+            <ResumeRow isHeader>
+              <Typography display="inline" fontWeight="bold">
+                Total de itens
+              </Typography>
+              <Typography display="inline" fontWeight="bold">
+                {totalResumeData.totalItems} ite
+                {totalResumeData.totalItems === 1 ? "m" : "ns"}
+              </Typography>
+            </ResumeRow>
+            <ResumeRow isHeader>
+              <Typography display="inline" fontWeight="bold">
+                Total de veículos para transporte
+              </Typography>
+              <Typography display="inline" fontWeight="bold">
+                {totalResumeData.totalFreightItems} veículo
+                {totalResumeData.totalFreightItems === 1 ? "" : "s"}
+              </Typography>
+            </ResumeRow>
+            <ResumeRow isHeader>
+              <Typography display="inline" fontWeight="bold">
+                Peso total
+              </Typography>
+              <Typography display="inline" fontWeight="bold">
+                {totalResumeData.totalLoad.toFixed(2)} tonelada
+                {totalResumeData.totalLoad === 1 ? "" : "s"}
+              </Typography>
+            </ResumeRow>
+          </Grid>
+        </>
+      )}
       <Button
         startIcon={<CalculateIcon />}
         variant="contained"

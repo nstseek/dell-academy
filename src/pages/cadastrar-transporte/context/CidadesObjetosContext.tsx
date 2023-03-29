@@ -1,6 +1,6 @@
 import { useGetCidades } from "@/api/Cidades/useGetCidades";
 import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
-import { createContext } from "react";
+import { createContext, ReactNode } from "react";
 
 type CidadesObjetosContextType = {
   cidades: ReturnType<typeof useGetCidades> | null;
@@ -14,7 +14,7 @@ export const CidadesObjetosContext = createContext<CidadesObjetosContextType>({
 
 type Props = {
   contextValue: CidadesObjetosContextType;
-  children: JSX.Element | JSX.Element[] | null;
+  children: ReactNode;
 };
 
 export const CidadesObjetosContextProvider: React.FC<Props> = ({
