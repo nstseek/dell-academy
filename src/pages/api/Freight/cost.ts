@@ -1,6 +1,6 @@
 import { Cost } from "@/bff/controllers/Freight";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { makeError } from "../utils/makeError";
+import { makeError } from "../../../features/api/utils/makeError";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!req.body.cidadeAId && req.body.cidadeAId !== 0) {

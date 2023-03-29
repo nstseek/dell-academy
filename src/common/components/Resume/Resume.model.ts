@@ -1,4 +1,4 @@
-import { useCalculateTransporte } from "../../../pages/cadastrar-transporte/hooks/useCalculateTransporte";
+import { useCalculateTransporte } from "@/features/cadastrar-transporte/hooks/useCalculateTransporte";
 import { ResumeCity } from "./components/ResumeCity";
 
 type TotalData = {

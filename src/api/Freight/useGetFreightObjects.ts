@@ -1,5 +1,5 @@
 import { Objects } from "@/bff/controllers/Freight";
-import { APIError } from "@/pages/api/utils/makeError";
+import { APIError } from "@/features/api/utils/makeError";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 

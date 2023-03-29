@@ -1,6 +1,6 @@
 import { Cidades } from "@/bff/controllers/DNIT";
 import { useQuery } from "react-query";
-import { APIError } from "@/pages/api/utils/makeError";
+import { APIError } from "@/features/api/utils/makeError";
 import { useMemo } from "react";
 
 type DataType = ReturnType<typeof Cidades["GET"]>;

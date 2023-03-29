@@ -1,7 +1,8 @@
-import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
+import { useGetCidades } from "@/api/Cidades/useGetCidades";
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
-import { CidadesObjetosContext } from "@/pages/cadastrar-transporte/context/CidadesObjetosContext";
-import { ObjetosListForm } from "@/pages/cadastrar-transporte/hooks/useCreateObjetosForm";
+import { CidadesObjetosContext } from "@/features/cadastrar-transporte/context/CidadesObjetosContext";
+import { CidadesListForm } from "@/features/cadastrar-transporte/hooks/useCreateCidadesForm";
+import { getCidade } from "@/features/cadastrar-transporte/utils/getCidade";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   IconButton,
@@ -12,31 +13,28 @@ import {
 } from "@mui/material";
 import React, { useContext } from "react";
 import { useFieldArray, useWatch } from "react-hook-form";
-import { getObjectTitle } from "./ObjetosList.model";
-import { StyledListItem } from "./ObjetosList.styles";
+import { StyledListItem } from "./CidadesList.styles";
 
-export const ObjetosList: React.FC = () => {
-  const objetosListFieldArray = useFieldArray<
-    ObjetosListForm,
+export const CidadesList: React.FC = () => {
+  const cidadesListFieldArray = useFieldArray<
+    CidadesListForm,
     never,
     "value" | "id"
   >({
     // @ts-expect-error looks like there's an error with typing in react hook forms library
     // or there's not enough documentation to use it with TypeScript
-    name: "objetos",
+    name: "cidades",
   });
 
-  const objetos: ObjetosListForm["objetos"] = useWatch({
-    name: "objetos",
+  const cidades: CidadesListForm["cidades"] = useWatch({
+    name: "cidades",
   });
 
-  const { objetos: objetosQuery, cidades: cidadesQuery } = useContext(
-    CidadesObjetosContext
-  );
+  const { cidades: cidadesQuery } = useContext(CidadesObjetosContext);
 
   return (
     <Wrapper>
-      {!!objetos.length && (
+      {!!cidades.length && (
         <List
           sx={{
             width: "100%",
@@ -44,14 +42,11 @@ export const ObjetosList: React.FC = () => {
             overflow: "auto",
           }}
         >
-          {objetos.map((objetoValue, index) => (
-            <StyledListItem key={objetoValue.value}>
+          {cidades.map((cidadeId, index) => (
+            <StyledListItem key={cidadeId.value}>
               <ListItemText>
-                {/* TODO: Improve this to show object name, weight, quantity and total weight */}
-                {/* Just like the consultar-trechos-x-modalidades */}
-                {getObjectTitle({
-                  objetoValue,
-                  objetosData: objetosQuery?.data,
+                {getCidade({
+                  cidadeId: cidadeId.value,
                   cidadesData: cidadesQuery?.data,
                 })}
               </ListItemText>
@@ -60,7 +55,7 @@ export const ObjetosList: React.FC = () => {
                   color="error"
                   edge="end"
                   aria-label="delete"
-                  onClick={() => objetosListFieldArray.remove(index)}
+                  onClick={() => cidadesListFieldArray.remove(index)}
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -69,9 +64,9 @@ export const ObjetosList: React.FC = () => {
           ))}
         </List>
       )}
-      {!objetos.length && (
+      {!cidades.length && (
         <Typography variant="body1">
-          Por favor, adicione um ou mais objetos
+          Por favor, adicione uma ou mais cidades
         </Typography>
       )}
     </Wrapper>

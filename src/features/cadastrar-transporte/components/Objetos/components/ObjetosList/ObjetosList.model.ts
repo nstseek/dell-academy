@@ -3,8 +3,8 @@ import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
 import {
   ObjetoForm,
   ObjetosListForm,
-} from "@/pages/cadastrar-transporte/hooks/useCreateObjetosForm";
-import { getCidade } from "@/pages/cadastrar-transporte/utils/getCidade";
+} from "@/features/cadastrar-transporte/hooks/useCreateObjetosForm";
+import { getCidade } from "@/features/cadastrar-transporte/utils/getCidade";
 
 export const getObjectTitle = ({
   objetoValue,

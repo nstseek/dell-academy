@@ -3,9 +3,9 @@ import Head from "next/head";
 import React from "react";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { FormProvider } from "react-hook-form";
-import { FreightForm } from "./components/freight-form/FreightForm";
-import { FreightResume } from "./components/freight-resume/FreightResume";
-import { useCreateFreightForm } from "./hooks/useCreateFreightForm";
+import { FreightForm } from "../../features/consultar-trechos-x-modalidades/components/freight-form/FreightForm";
+import { FreightResume } from "../../features/consultar-trechos-x-modalidades/components/freight-resume/FreightResume";
+import { useCreateFreightForm } from "@/features/consultar-trechos-x-modalidades/hooks/useCreateFreightForm";
 import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
 import { useResetOnChangeForm } from "@/common/utils/hooks/useResetOnChangeForm";
 

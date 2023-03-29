@@ -1,6 +1,6 @@
 import { LoadedCostBulk } from "@/bff/controllers/Freight";
 import { useMutation } from "react-query";
-import { APIError } from "@/pages/api/utils/makeError";
+import { APIError } from "@/features/api/utils/makeError";
 
 type DataType = ReturnType<typeof LoadedCostBulk["POST"]>;
 

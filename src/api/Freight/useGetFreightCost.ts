@@ -1,7 +1,7 @@
 import { Cost } from "@/bff/controllers/Freight";
-import { FreightForm } from "@/pages/consultar-trechos-x-modalidades/hooks/useCreateFreightForm";
-import { useMutation, useQuery } from "react-query";
-import { APIError } from "@/pages/api/utils/makeError";
+import { FreightForm } from "@/features/consultar-trechos-x-modalidades/hooks/useCreateFreightForm";
+import { useMutation } from "react-query";
+import { APIError } from "@/features/api/utils/makeError";
 
 type DataType = ReturnType<typeof Cost["POST"]>;
 

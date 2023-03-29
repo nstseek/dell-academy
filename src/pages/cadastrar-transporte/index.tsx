@@ -1,17 +1,17 @@
 import { Grid, Typography } from "@mui/material";
 import Head from "next/head";
 import React from "react";
-import { useCreateCidadesForm } from "./hooks/useCreateCidadesForm";
-import { Cidades } from "./components/Cidades/Cidades";
-import { Objetos } from "./components/Objetos/Objetos";
-import { useCreateObjetosForm } from "./hooks/useCreateObjetosForm";
+import { useCreateCidadesForm } from "@/features/cadastrar-transporte/hooks/useCreateCidadesForm";
+import { Cidades } from "../../features/cadastrar-transporte/components/Cidades/Cidades";
+import { Objetos } from "../../features/cadastrar-transporte/components/Objetos/Objetos";
+import { useCreateObjetosForm } from "@/features/cadastrar-transporte/hooks/useCreateObjetosForm";
 import { useGetCidades } from "@/api/Cidades/useGetCidades";
-import { CidadesObjetosContextProvider } from "./context/CidadesObjetosContext";
+import { CidadesObjetosContextProvider } from "@/features/cadastrar-transporte/context/CidadesObjetosContext";
 import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
 import { Resume } from "@/common/components/Resume/Resume";
-import { useCalculateTransporte } from "./hooks/useCalculateTransporte";
-import { useResetResume } from "./hooks/useResetResume";
-import { useSaveTransporte } from "./hooks/useSaveTransporte";
+import { useCalculateTransporte } from "@/features/cadastrar-transporte/hooks/useCalculateTransporte";
+import { useResetResume } from "@/features/cadastrar-transporte/hooks/useResetResume";
+import { useSaveTransporte } from "@/features/cadastrar-transporte/hooks/useSaveTransporte";
 
 const CadstrarTransporte = () => {
   const cidadesForms = useCreateCidadesForm();

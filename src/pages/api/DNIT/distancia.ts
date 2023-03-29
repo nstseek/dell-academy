@@ -1,6 +1,6 @@
 import { Distancia } from "@/bff/controllers/DNIT";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { makeError } from "../utils/makeError";
+import { makeError } from "../../../features/api/utils/makeError";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const cidadeA = Number(req.query.cidadeA);

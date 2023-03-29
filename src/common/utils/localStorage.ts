@@ -1,4 +1,4 @@
-import { useCalculateTransporte } from "@/pages/cadastrar-transporte/hooks/useCalculateTransporte";
+import { useCalculateTransporte } from "@/features/cadastrar-transporte/hooks/useCalculateTransporte";
 
 enum LocalStorageKeys {
   transportes = "transportes",

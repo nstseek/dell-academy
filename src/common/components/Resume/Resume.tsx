@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import CalculateIcon from "@mui/icons-material/Calculate";
-import { useCalculateTransporte } from "../../../pages/cadastrar-transporte/hooks/useCalculateTransporte";
+import { useCalculateTransporte } from "@/features/cadastrar-transporte/hooks/useCalculateTransporte";
 import { ResumeCity } from "./components/ResumeCity";
 import { getCityResumeData, getResumeTotalData } from "./Resume.model";
 import { ResumeRow } from "./Resume.styles";

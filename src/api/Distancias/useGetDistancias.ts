@@ -1,6 +1,6 @@
 import { Distancias } from "@/bff/controllers/DNIT";
 import { useQuery } from "react-query";
-import { APIError } from "@/pages/api/utils/makeError";
+import { APIError } from "@/features/api/utils/makeError";
 
 type DataType = ReturnType<typeof Distancias["GET"]>;
 

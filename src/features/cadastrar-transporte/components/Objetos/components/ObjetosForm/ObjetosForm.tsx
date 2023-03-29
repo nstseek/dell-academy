@@ -1,8 +1,8 @@
 import { FormErrors } from "@/common/components/FormErrors/FormErrors";
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
-import { CidadesObjetosContext } from "@/pages/cadastrar-transporte/context/CidadesObjetosContext";
-import { CidadesListForm } from "@/pages/cadastrar-transporte/hooks/useCreateCidadesForm";
-import { ObjetoForm } from "@/pages/cadastrar-transporte/hooks/useCreateObjetosForm";
+import { CidadesObjetosContext } from "@/features/cadastrar-transporte/context/CidadesObjetosContext";
+import { CidadesListForm } from "@/features/cadastrar-transporte/hooks/useCreateCidadesForm";
+import { ObjetoForm } from "@/features/cadastrar-transporte/hooks/useCreateObjetosForm";
 import { AutocompleteOption } from "@/common/utils/types";
 import AddIcon from "@mui/icons-material/Add";
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
