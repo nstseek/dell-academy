@@ -15,6 +15,7 @@ export const DellLogo: React.FC<Props> = ({
       viewBox="0 0 700 700"
       id="svg4"
       style={{ margin: "auto", width, height }}
+      data-testid="dell-logo"
     >
       <defs id="defs8" />
       <path
