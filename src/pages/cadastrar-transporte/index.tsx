@@ -9,6 +9,7 @@ import { useGetCidades } from "@/api/Cidades/useGetCidades";
 import { CidadesObjetosContextProvider } from "./context/CidadesObjetosContext";
 import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
 import { Resume } from "./components/Resume/Resume";
+import { useCalculateTransporte } from "./hooks/useCalculateTransporte";
 
 const CadstrarTransporte = () => {
   const cidadesForms = useCreateCidadesForm();
@@ -17,11 +18,14 @@ const CadstrarTransporte = () => {
   const cidadesQuery = useGetCidades();
   const objetosQuery = useGetFreightObjects();
 
-  const  = useCalculateTransporte();
+  const { submit } = useCalculateTransporte({
+    cidadesListForm: cidadesForms.cidadesListForm,
+    objetosListForm: objetosForms.objetosListForm,
+  });
 
-  const onCalculate = (objetosFormList) => {
-
-  }
+  const onCalculate = () => {
+    submit();
+  };
 
   return (
     <>
