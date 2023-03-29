@@ -5,7 +5,7 @@ import CalculateIcon from "@mui/icons-material/Calculate";
 import { ResumeRow } from "./components/ResumeRow";
 
 type Props = {
-  onCalculate: () => void;
+  onCalculate: (objetosFormList: any) => void;
 };
 
 export const Resume: React.FC<Props> = ({ onCalculate }) => {
@@ -33,12 +33,14 @@ export const Resume: React.FC<Props> = ({ onCalculate }) => {
         padding="1px"
         width="100%"
       >
-        <Typography>
+        <span>
           <Typography display="inline" fontWeight="bold">
             Para {cidadeDestino}
           </Typography>{" "}
-          <sub style={{ color: grey[700] }}>({distancia}km)</sub>
-        </Typography>
+          <Typography display="inline">
+            <sub style={{ color: grey[700] }}>({distancia}km)</sub>
+          </Typography>
+        </span>
       </Grid>
       <ResumeRow />
       <Grid
@@ -65,16 +67,18 @@ export const Resume: React.FC<Props> = ({ onCalculate }) => {
         paddingLeft={2}
         width="100%"
       >
-        <Typography variant="body1">
+        <span>
           <Typography display="inline" fontWeight="bold">
             {caminhaoQuantity}x
           </Typography>{" "}
-          {caminhao} ({caminhaoCapacity} ton){" "}
-          <sub style={{ color: grey[500] }}>
-            ({formatNumberToCurrency(singleCaminhaoKmPrice)} x {distancia}km ={" "}
-            {formatNumberToCurrency(singleCaminhaoPrice)})
-          </sub>
-        </Typography>
+          <Typography display="inline">
+            {caminhao} ({caminhaoCapacity} ton){" "}
+            <sub style={{ color: grey[500] }}>
+              ({formatNumberToCurrency(singleCaminhaoKmPrice)} x {distancia}km ={" "}
+              {formatNumberToCurrency(singleCaminhaoPrice)})
+            </sub>
+          </Typography>
+        </span>
         <Typography variant="body1" fontWeight="bold">
           {formatNumberToCurrency(caminhaoPrice)}
         </Typography>

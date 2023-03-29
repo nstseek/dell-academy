@@ -19,15 +19,17 @@ export const ResumeRow = () => {
       paddingLeft={2}
       width="100%"
     >
-      <Typography variant="body1">
+      <span>
         <Typography display="inline" fontWeight="bold">
           {quantity}x
         </Typography>{" "}
-        {name} ({weight} ton){" "}
-        <sub style={{ color: grey[500] }}>
-          ({quantity}x {weight}T)
-        </sub>
-      </Typography>
+        <Typography display="inline">
+          {name} ({weight} ton){" "}
+          <sub style={{ color: grey[500] }}>
+            ({quantity}x {weight}T)
+          </sub>
+        </Typography>
+      </span>
       <Typography variant="body1" fontWeight="bold">
         {(quantity * weight).toFixed(2)} ton
       </Typography>
