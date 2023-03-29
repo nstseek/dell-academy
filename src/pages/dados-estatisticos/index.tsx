@@ -28,20 +28,24 @@ const DadosEstatisticos = () => {
             alignItems="center"
             rowGap={2}
           >
-            {transportes?.map((transporte, index) => (
-              <>
-                <Typography>
-                  Transporte {index + 1} -{" "}
-                  {new Date(transporte.timestamp).toLocaleString()}
-                </Typography>
-                <Resume
-                  key={index}
-                  data={transporte.content}
-                  isLoading={false}
-                  error={null}
-                />
-              </>
-            ))}
+            {transportes ? (
+              transportes.map((transporte, index) => (
+                <>
+                  <Typography>
+                    Transporte {index + 1} -{" "}
+                    {new Date(transporte.timestamp).toLocaleString()}
+                  </Typography>
+                  <Resume
+                    key={index}
+                    data={transporte.content}
+                    isLoading={false}
+                    error={null}
+                  />
+                </>
+              ))
+            ) : (
+              <Typography>Nenhum dado disponível</Typography>
+            )}
           </Grid>
         </Grid>
       </main>

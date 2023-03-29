@@ -65,7 +65,13 @@ export const getCityResumeData = (
     freightItems,
     totalFreightItems: getFreightQuantity(freightItems),
     totalItems: getItemsQuantityInTransporte(transporte),
-    objects: Object.values(transporte.selectedObjects),
+    objects: Object.values(transporte.selectedObjects).map(
+      (selectedObject) => ({
+        ...selectedObject,
+        totalOrderWeight: transporte.totalLoad,
+        totalOrderCost: transporte.totalCost,
+      })
+    ),
     totalLoad: transporte.totalLoad,
   };
 };
