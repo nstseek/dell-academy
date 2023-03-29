@@ -2,7 +2,7 @@ import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Control, useWatch } from "react-hook-form";
-import { FreightForm } from "../../pages/consultar-trechos-x-modalidades/hooks/useCreateFreightForm";
+import { FreightForm } from "../../../pages/consultar-trechos-x-modalidades/hooks/useCreateFreightForm";
 
 export const useResetOnChangeForm = ({
   control,

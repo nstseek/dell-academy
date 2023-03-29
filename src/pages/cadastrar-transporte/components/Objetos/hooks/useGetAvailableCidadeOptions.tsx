@@ -1,5 +1,5 @@
 import { CidadesListForm } from "@/pages/cadastrar-transporte/hooks/useCreateCidadesForm";
-import { AutocompleteOption } from "@/utils/types";
+import { AutocompleteOption } from "@/common/utils/types";
 import { Control, useWatch } from "react-hook-form";
 
 export const useGetAvailableCidadeOptions = ({

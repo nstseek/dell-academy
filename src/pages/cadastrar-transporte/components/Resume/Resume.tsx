@@ -1,5 +1,5 @@
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
-import { formatNumberToCurrency } from "@/utils/currency";
+import { formatNumberToCurrency } from "@/common/utils/currency";
 import { Button, Grid, Typography, useTheme } from "@mui/material";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import { ResumeRow } from "./components/ResumeRow";

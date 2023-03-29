@@ -1,5 +1,5 @@
 import { getRawDistanciasFile } from "@/bff/data-sources/DNIT";
-import { parseCSV } from "@/utils/parseCSV";
+import { parseCSV } from "@/common/utils/parseCSV";
 import _ from "lodash";
 
 export const getCidadesDistancias = () => {

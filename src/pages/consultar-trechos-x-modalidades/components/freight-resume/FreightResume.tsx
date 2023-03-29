@@ -1,6 +1,6 @@
 import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
-import { formatNumberToCurrency } from "@/utils/currency";
+import { formatNumberToCurrency } from "@/common/utils/currency";
 import {
   Alert,
   CircularProgress,

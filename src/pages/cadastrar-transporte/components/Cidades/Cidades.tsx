@@ -11,7 +11,7 @@ import {
 } from "react-hook-form";
 import { CidadeForm, CidadesListForm } from "../../hooks/useCreateCidadesForm";
 import { useGetCidades } from "@/api/Cidades/useGetCidades";
-import { AutocompleteOption } from "@/utils/types";
+import { AutocompleteOption } from "@/common/utils/types";
 import { CidadesObjetosContext } from "../../context/CidadesObjetosContext";
 
 type Props = {
