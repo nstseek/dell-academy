@@ -8,9 +8,10 @@ import { useCreateObjetosForm } from "./hooks/useCreateObjetosForm";
 import { useGetCidades } from "@/api/Cidades/useGetCidades";
 import { CidadesObjetosContextProvider } from "./context/CidadesObjetosContext";
 import { useGetFreightObjects } from "@/api/Freight/useGetFreightObjects";
-import { Resume } from "./components/Resume/Resume";
+import { Resume } from "@/common/components/Resume/Resume";
 import { useCalculateTransporte } from "./hooks/useCalculateTransporte";
 import { useResetResume } from "./hooks/useResetResume";
+import { useSaveTransporte } from "./hooks/useSaveTransporte";
 
 const CadstrarTransporte = () => {
   const cidadesForms = useCreateCidadesForm();
@@ -24,6 +25,10 @@ const CadstrarTransporte = () => {
     objetosListForm: objetosForms.objetosListForm,
   });
 
+  const onCalculate = () => {
+    submit();
+  };
+
   useResetResume({
     cidadesListForm: cidadesForms.cidadesListForm,
     objetosListForm: objetosForms.objetosListForm,
@@ -33,9 +38,7 @@ const CadstrarTransporte = () => {
     reset,
   });
 
-  const onCalculate = () => {
-    submit();
-  };
+  useSaveTransporte(data);
 
   return (
     <>

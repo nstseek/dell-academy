@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import CalculateIcon from "@mui/icons-material/Calculate";
-import { useCalculateTransporte } from "../../hooks/useCalculateTransporte";
+import { useCalculateTransporte } from "../../../pages/cadastrar-transporte/hooks/useCalculateTransporte";
 import { ResumeCity } from "./components/ResumeCity";
 import { getCityResumeData, getResumeTotalData } from "./Resume.model";
 import { ResumeRow } from "./Resume.styles";
@@ -17,7 +17,7 @@ type Props = Pick<
   ReturnType<typeof useCalculateTransporte>,
   "data" | "isLoading" | "error"
 > & {
-  onCalculate: (objetosFormList: any) => void;
+  onCalculate?: (objetosFormList: any) => void;
 };
 
 export const Resume: React.FC<Props> = ({
@@ -91,14 +91,16 @@ export const Resume: React.FC<Props> = ({
           </Grid>
         </>
       )}
-      <Button
-        startIcon={<CalculateIcon />}
-        variant="contained"
-        color="primary"
-        onClick={onCalculate}
-      >
-        Calcular
-      </Button>
+      {onCalculate && (
+        <Button
+          startIcon={<CalculateIcon />}
+          variant="contained"
+          color="primary"
+          onClick={onCalculate}
+        >
+          Calcular
+        </Button>
+      )}
     </Wrapper>
   );
 };
