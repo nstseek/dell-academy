@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <DellLogo />
             <Sidebar />
           </SidebarGrid>
-          <ContentGrid item xs={9}>
+          <ContentGrid item xs={9} height="100%" overflow="auto">
             <Component {...pageProps} />
           </ContentGrid>
         </RootGrid>
