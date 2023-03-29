@@ -1,5 +1,5 @@
 export const parseCSV = (csvFile: string): string[][] => {
-  const rows = csvFile.split("\r\n");
+  const rows = csvFile.split("\n");
   const csvArray: string[][] = [];
   rows.forEach((row) => {
     const cells = row.split(";");
