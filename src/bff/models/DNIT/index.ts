@@ -2,8 +2,8 @@ import { getRawDistanciasFile } from "@/bff/data-sources/DNIT";
 import { parseCSV } from "@/utils/parseCSV";
 import _ from "lodash";
 
-export const getCidadesDistancias = async () => {
-  const distanciasRawCSV = await getRawDistanciasFile();
+export const getCidadesDistancias = () => {
+  const distanciasRawCSV = getRawDistanciasFile();
   const [cidades, ...distancias] = parseCSV(distanciasRawCSV);
   return {
     cidades: cidades.map((cidade) => _.startCase(_.lowerCase(cidade))),
@@ -13,14 +13,14 @@ export const getCidadesDistancias = async () => {
   };
 };
 
-export const getDistancia = async ({
+export const getDistancia = ({
   cidadeA,
   cidadeB,
 }: {
   cidadeA: number;
   cidadeB: number;
 }) => {
-  const { cidades, distancias } = await getCidadesDistancias();
+  const { cidades, distancias } = getCidadesDistancias();
 
   return {
     cidadeA: { id: cidadeA, nome: cidades[cidadeA] },

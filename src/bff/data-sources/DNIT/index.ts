@@ -1,7 +1,7 @@
 import fs from "fs";
 
-export const getRawDistanciasFile = async () => {
-  const file = await fs.readFileSync(
+export const getRawDistanciasFile = () => {
+  const file = fs.readFileSync(
     "./src/bff/assets/data/DNIT-Distancias.csv",
     "utf8"
   );

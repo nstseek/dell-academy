@@ -2,10 +2,7 @@ import { Cost } from "@/bff/controllers/Freight";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { makeError } from "../utils/makeError";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!req.body.cidadeAId && req.body.cidadeAId !== 0) {
     return res.status(400).json(makeError("Cidade A inválida"));
   }
@@ -16,5 +13,5 @@ export default async function handler(
     return res.status(400).json(makeError("Modalidade de transporte inválido"));
   }
 
-  res.status(200).json(await Cost.POST(req.body));
+  res.status(200).json(Cost.POST(req.body));
 }

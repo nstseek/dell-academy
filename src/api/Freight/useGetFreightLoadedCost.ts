@@ -2,7 +2,7 @@ import { LoadedCost } from "@/bff/controllers/Freight";
 import { useMutation } from "react-query";
 import { APIError } from "@/pages/api/utils/makeError";
 
-type DataType = Awaited<ReturnType<typeof LoadedCost["POST"]>>;
+type DataType = ReturnType<typeof LoadedCost["POST"]>;
 
 type BodyType = Parameters<typeof LoadedCost["POST"]>[0];
 
@@ -16,7 +16,7 @@ export const useGetFreightLoadedCost = () => {
         objectIdsQuantity,
       };
 
-      return fetch("api/Freight/cost", {
+      return fetch("api/Freight/loaded-cost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

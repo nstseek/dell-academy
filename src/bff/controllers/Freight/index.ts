@@ -25,3 +25,13 @@ export const LoadedCost = {
     objectIdsQuantity: { [key: number]: number };
   }) => getLoadedFreightCost(args),
 };
+
+export const LoadedCostBulk = {
+  POST: (
+    args: {
+      cidadeAId: number;
+      cidadeBId: number;
+      objectIdsQuantity: { [key: number]: number };
+    }[]
+  ) => args.map((arg) => getLoadedFreightCost(arg)),
+};

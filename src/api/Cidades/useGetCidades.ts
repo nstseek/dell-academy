@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { APIError } from "@/pages/api/utils/makeError";
 import { useMemo } from "react";
 
-type DataType = Awaited<ReturnType<typeof Cidades["GET"]>>;
+type DataType = ReturnType<typeof Cidades["GET"]>;
 
 const getCidadeOptions = (cidadesArray?: DataType) => {
   return cidadesArray

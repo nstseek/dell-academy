@@ -3,7 +3,7 @@ import { FreightForm } from "@/pages/consultar-trechos-x-modalidades/hooks/useCr
 import { useMutation, useQuery } from "react-query";
 import { APIError } from "@/pages/api/utils/makeError";
 
-type DataType = Awaited<ReturnType<typeof Cost["POST"]>>;
+type DataType = ReturnType<typeof Cost["POST"]>;
 
 export const useGetFreightCost = () => {
   return useMutation<DataType, APIError, FreightForm>(

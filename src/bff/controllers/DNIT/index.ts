@@ -1,16 +1,16 @@
 import { getCidadesDistancias, getDistancia } from "@/bff/models/DNIT";
 
 export const Cidades = {
-  GET: async () => {
-    const { cidades } = await getCidadesDistancias();
+  GET: () => {
+    const { cidades } = getCidadesDistancias();
 
     return { cidades };
   },
 };
 
 export const Distancias = {
-  GET: async () => {
-    const { distancias } = await getCidadesDistancias();
+  GET: () => {
+    const { distancias } = getCidadesDistancias();
 
     return { distancias };
   },

@@ -3,7 +3,7 @@ import { APIError } from "@/pages/api/utils/makeError";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 
-type DataType = Awaited<ReturnType<typeof Options["GET"]>>;
+type DataType = ReturnType<typeof Options["GET"]>;
 
 const getFreightOptions = (freightOptionsArray?: DataType) => {
   return freightOptionsArray

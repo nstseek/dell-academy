@@ -15,7 +15,7 @@ export const getFreightOption = ({ id }: { id: number }) => ({
   ),
 });
 
-export const getFreightCost = async ({
+export const getFreightCost = ({
   cidadeAId,
   cidadeBId,
   freightType,
@@ -24,7 +24,7 @@ export const getFreightCost = async ({
   cidadeBId: number;
   freightType: number;
 }) => {
-  const { cidadeA, cidadeB, distancia } = await getDistancia({
+  const { cidadeA, cidadeB, distancia } = getDistancia({
     cidadeA: cidadeAId,
     cidadeB: cidadeBId,
   });
@@ -121,7 +121,7 @@ const getBangForBuckTurningPoint = ({
   );
 };
 
-export const getLoadedFreightCost = async ({
+export const getLoadedFreightCost = ({
   cidadeAId,
   cidadeBId,
   objectIdsQuantity,
@@ -130,7 +130,7 @@ export const getLoadedFreightCost = async ({
   cidadeBId: number;
   objectIdsQuantity: { [key: number]: number };
 }) => {
-  const { cidadeA, cidadeB, distancia } = await getDistancia({
+  const { cidadeA, cidadeB, distancia } = getDistancia({
     cidadeA: cidadeAId,
     cidadeB: cidadeBId,
   });
@@ -150,33 +150,39 @@ export const getLoadedFreightCost = async ({
 
   const sortedFreights = freightOptions.sort((a, b) => b.price - a.price);
 
-  for (const [index, selectedFreight] of sortedFreights.entries()) {
-    const nextFreight = sortedFreights[index + 1];
+  const cheapestFreight = sortedFreights.at(-1);
 
-    freightsToOrder[selectedFreight.id].quantity = Math.floor(
-      remainingLoad / selectedFreight.capacity
-    );
-    remainingLoad -=
-      freightsToOrder[selectedFreight.id].quantity * selectedFreight.capacity;
+  if (cheapestFreight && remainingLoad < cheapestFreight.capacity) {
+    freightsToOrder[cheapestFreight.id].quantity += 1;
+  } else {
+    for (const [index, selectedFreight] of sortedFreights.entries()) {
+      const nextFreight = sortedFreights[index + 1];
 
-    // logica pra ver se vale mais a pena pegar mais um do maior
-    if (nextFreight) {
-      // se o valor restante da carga a se carregar for maior que esse valor
-      // vale a pena pegar o mais caro
-      // se for igual ou menor, vale a pena pegar o mais barato
-      const costBenefitCoefficient = getBangForBuckTurningPoint({
-        freightOption: selectedFreight,
-        cheaperFreightOption: nextFreight,
-      });
+      freightsToOrder[selectedFreight.id].quantity = Math.floor(
+        remainingLoad / selectedFreight.capacity
+      );
+      remainingLoad -=
+        freightsToOrder[selectedFreight.id].quantity * selectedFreight.capacity;
 
-      if (remainingLoad > costBenefitCoefficient) {
-        freightsToOrder[selectedFreight.id].quantity += 1;
-        remainingLoad -= selectedFreight.capacity;
+      // logica pra ver se vale mais a pena pegar mais um do maior
+      if (nextFreight) {
+        // se o valor restante da carga a se carregar for maior que esse valor
+        // vale a pena pegar o mais caro
+        // se for igual ou menor, vale a pena pegar o mais barato
+        const costBenefitCoefficient = getBangForBuckTurningPoint({
+          freightOption: selectedFreight,
+          cheaperFreightOption: nextFreight,
+        });
+
+        if (remainingLoad > costBenefitCoefficient) {
+          freightsToOrder[selectedFreight.id].quantity += 1;
+          remainingLoad -= selectedFreight.capacity;
+        }
       }
-    }
 
-    // cleanup na carga restante se tiver zerado
-    remainingLoad = removeNegativePart(remainingLoad);
+      // cleanup na carga restante se tiver zerado
+      remainingLoad = removeNegativePart(remainingLoad);
+    }
   }
 
   const costPerKm = Object.values(freightsToOrder).reduce(
@@ -195,5 +201,6 @@ export const getLoadedFreightCost = async ({
     totalLoad,
     cidadeA,
     cidadeB,
+    distancia,
   };
 };

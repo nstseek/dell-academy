@@ -2,7 +2,7 @@ import { Distancia } from "@/bff/controllers/DNIT";
 import { useQuery } from "react-query";
 import { APIError } from "@/pages/api/utils/makeError";
 
-type DataType = Awaited<ReturnType<typeof Distancia["GET"]>>;
+type DataType = ReturnType<typeof Distancia["GET"]>;
 
 export const useGetDistancia = ({
   cidadeA,

@@ -3,7 +3,7 @@ import { APIError } from "@/pages/api/utils/makeError";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 
-type DataType = Awaited<ReturnType<typeof Objects["GET"]>>;
+type DataType = ReturnType<typeof Objects["GET"]>;
 
 const getFreightObjects = (freightObjectsArray?: DataType) => {
   return freightObjectsArray
