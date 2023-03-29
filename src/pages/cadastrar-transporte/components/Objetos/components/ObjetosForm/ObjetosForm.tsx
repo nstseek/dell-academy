@@ -1,14 +1,13 @@
 import { FormErrors } from "@/common/components/FormErrors/FormErrors";
 import { Wrapper } from "@/common/components/Wrapper/Wrapper";
-import options from "@/pages/api/Freight/options";
 import { CidadesObjetosContext } from "@/pages/cadastrar-transporte/context/CidadesObjetosContext";
 import { CidadesListForm } from "@/pages/cadastrar-transporte/hooks/useCreateCidadesForm";
 import { ObjetoForm } from "@/pages/cadastrar-transporte/hooks/useCreateObjetosForm";
 import { AutocompleteOption } from "@/utils/types";
 import AddIcon from "@mui/icons-material/Add";
 import { Autocomplete, Button, TextField, Typography } from "@mui/material";
-import React, { useContext } from "react";
-import { Control, useFormContext } from "react-hook-form";
+import React, { useContext, useRef } from "react";
+import { Control, Controller, useFormContext } from "react-hook-form";
 import { useGetAvailableCidadeOptions } from "../../hooks/useGetAvailableCidadeOptions";
 
 type Props = {
@@ -22,17 +21,15 @@ export const ObjetosForm: React.FC<Props> = ({
 }) => {
   const form = useFormContext<ObjetoForm>();
 
-  const isOptionEqualToValue = (
-    option: AutocompleteOption,
-    value: AutocompleteOption
-  ) => option.id === value.id;
-
   const { objetos, cidades } = useContext(CidadesObjetosContext);
 
   const selectedCidadesOptions = useGetAvailableCidadeOptions({
     cidadesListFormControl,
     cidadesOptions: cidades?.options ?? [],
   });
+
+  const getOptionLabel = (value: string, options: AutocompleteOption[]) =>
+    options.find((option) => option.id === value)?.label ?? "";
 
   return (
     <form
@@ -43,23 +40,32 @@ export const ObjetosForm: React.FC<Props> = ({
         {selectedCidadesOptions.length >= 2 ? (
           <>
             <FormErrors />
-            <Autocomplete
-              disablePortal
-              fullWidth
-              sx={{ borderColor: "red" }}
-              id="objeto"
-              options={objetos?.options ?? []}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Objeto"
-                  error={!!form.formState.errors.objetoToAdd}
+            <Controller
+              name="objetoToAdd"
+              control={form.control}
+              defaultValue=""
+              render={({ field }) => (
+                <Autocomplete<string>
+                  disablePortal
+                  fullWidth
+                  id="objeto-to-add"
+                  options={objetos?.options?.map((option) => option.id) ?? []}
+                  value={field.value}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Objeto"
+                      error={!!form.formState.errors.objetoToAdd}
+                    />
+                  )}
+                  getOptionLabel={(value) =>
+                    getOptionLabel(value, objetos?.options ?? [])
+                  }
+                  onChange={(_e, value) => {
+                    form.setValue("objetoToAdd", value ?? "");
+                  }}
                 />
               )}
-              isOptionEqualToValue={isOptionEqualToValue}
-              onChange={(_e, value) => {
-                form.setValue("objetoToAdd", value?.id ?? "");
-              }}
             />
             <TextField
               {...form.register("quantity", { required: true })}
@@ -69,23 +75,32 @@ export const ObjetosForm: React.FC<Props> = ({
               label="Quantidade"
               InputProps={{ inputProps: { min: 0 } }}
             />
-            <Autocomplete
-              disablePortal
-              fullWidth
-              sx={{ borderColor: "red" }}
-              id="cidade-destino"
-              options={selectedCidadesOptions}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Cidade de destino"
-                  error={!!form.formState.errors.cidadeDestino}
+            <Controller
+              name="cidadeDestino"
+              control={form.control}
+              defaultValue=""
+              render={({ field }) => (
+                <Autocomplete
+                  disablePortal
+                  fullWidth
+                  id="cidade-destino"
+                  value={field.value}
+                  options={selectedCidadesOptions.map((option) => option.id)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Cidade de destino"
+                      error={!!form.formState.errors.cidadeDestino}
+                    />
+                  )}
+                  getOptionLabel={(value) =>
+                    getOptionLabel(value, selectedCidadesOptions)
+                  }
+                  onChange={(_e, value) => {
+                    form.setValue("cidadeDestino", value ?? "");
+                  }}
                 />
               )}
-              isOptionEqualToValue={isOptionEqualToValue}
-              onChange={(_e, value) => {
-                form.setValue("cidadeDestino", value?.id ?? "");
-              }}
             />
             <Button
               startIcon={<AddIcon />}

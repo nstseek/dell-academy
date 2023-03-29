@@ -1,6 +1,6 @@
 import { CircularProgress, Grid } from "@mui/material";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ObjetosForm } from "./components/ObjetosForm/ObjetosForm";
 import { ObjetosList } from "./components/ObjetosList/ObjetosList";
 import {
@@ -46,20 +46,30 @@ export const Objetos: React.FC<Props> = ({
     control: objetosListForm.control,
   });
 
+  useEffect(() => {
+    objetoForm.reset();
+    objetosListForm.reset();
+  }, [cidadesListValues, objetosListForm, objetoForm]);
+
   const onAddObjeto = ({
     objetoToAdd,
     quantity,
     cidadeDestino,
   }: ObjetoForm) => {
-    if (objetosListValues.find((objeto) => objeto.value === objetoToAdd)) {
+    if (
+      objetosListValues.find(
+        (objeto) =>
+          objeto.value === objetoToAdd && objeto.cidadeDestino === cidadeDestino
+      )
+    ) {
       return objetoForm.setError("objetoToAdd", {
         message:
-          "Você não pode adicionar dois objetos iguais, se você quer alterar a quantidade, remova o objeto e adicione novamente",
+          "Você não pode adicionar dois objetos iguais pro mesmo destino. Se você quer alterar a quantidade, remova o objeto e adicione novamente",
       });
     }
     if (cidadesListValues[0].value === cidadeDestino) {
       return objetoForm.setError("cidadeDestino", {
-        message: "Você não enviar um objeto pra sua cidade de origem",
+        message: "Você não pode enviar um objeto pra sua cidade de origem",
       });
     }
     objetosListFieldArray.append({
