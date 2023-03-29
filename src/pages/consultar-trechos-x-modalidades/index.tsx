@@ -7,7 +7,7 @@ import { FreightForm } from "./components/freight-form/FreightForm";
 import { FreightResume } from "./components/freight-resume/FreightResume";
 import { useCreateFreightForm } from "./hooks/useCreateFreightForm";
 import { useGetFreightCost } from "@/api/Freight/useGetFreightCost";
-import { useResetOnChangeForm } from "./hooks/useResetOnChangeForm";
+import { useResetOnChangeForm } from "@/utils/hooks/useResetOnChangeForm";
 
 const ConsultarTrechosModalidades = () => {
   const form = useCreateFreightForm();
